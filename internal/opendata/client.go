@@ -27,7 +27,6 @@ type Output struct {
 type Inspection struct {
 	CuisineDescription   *string `json:"cuisine_description,omitempty"`
 	DBA                  *string `json:"dba,omitempty"`
-	RecordDate           *string `json:"record_date,omitempty"`
 	Boro                 *string `json:"boro,omitempty"`
 	InspectionDate       *string `json:"inspection_date,omitempty"`
 	Building             *string `json:"building,omitempty"`

@@ -64,7 +64,6 @@ func TestRetrieveInspections_shouldRetrieveAndUnmarshalResponse(t *testing.T) {
 			{
 				CuisineDescription:   toStrPtr("Bakery"),
 				DBA:                  toStrPtr("MORRIS PARK BAKE SHOP"),
-				RecordDate:           toStrPtr("2017-09-15T06:00:47"),
 				Boro:                 toStrPtr("BRONX"),
 				InspectionDate:       toStrPtr("2017-05-18T00:00:00"),
 				Building:             toStrPtr("1007"),
@@ -85,7 +84,6 @@ func TestRetrieveInspections_shouldRetrieveAndUnmarshalResponse(t *testing.T) {
 			{
 				CuisineDescription:   toStrPtr("Bakery"),
 				DBA:                  toStrPtr("MORRIS PARK BAKE SHOP"),
-				RecordDate:           toStrPtr("2017-09-15T06:00:47"),
 				Boro:                 toStrPtr("BRONX"),
 				InspectionDate:       toStrPtr("2017-05-18T00:00:00"),
 				Building:             toStrPtr("1007"),

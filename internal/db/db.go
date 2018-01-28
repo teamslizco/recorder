@@ -22,7 +22,6 @@ type db struct {
 type CreateInspectionInput struct {
 	CuisineDescription   *string `json:"cuisine_description,omitempty"`
 	DBA                  *string `json:"dba,omitempty"`
-	RecordDate           *string `json:"record_date,omitempty"`
 	Boro                 *string `json:"boro,omitempty"`
 	InspectionDate       *string `json:"inspection_date,omitempty"`
 	Building             *string `json:"building,omitempty"`
@@ -100,11 +99,6 @@ func (db *db) CreateInspection(i *CreateInspectionInput) (*Inspection, error) {
 		return nil, errors.Wrap(err, "cannot convert grade date")
 	}
 
-	recordDate, err := strToDate(i.GradeDate)
-	if err != nil {
-		return nil, errors.Wrap(err, "cannot convert record date")
-	}
-
 	inspec := Inspection{
 		RestaurantID:   restaurant.ID,
 		InspectionType: stringP(i.InspectionType),
@@ -113,7 +107,6 @@ func (db *db) CreateInspection(i *CreateInspectionInput) (*Inspection, error) {
 		Score:          stringP(i.Score),
 		GradeID:        grade.ID,
 		GradeDate:      gradeDate,
-		RecordDate:     recordDate,
 		InspectionDate: inspectionDate,
 	}
 
@@ -126,7 +119,6 @@ func (db *db) CreateInspection(i *CreateInspectionInput) (*Inspection, error) {
 			"score":           inspec.Score,
 			"grade_id":        inspec.GradeID,
 			"grade_date":      inspec.GradeDate,
-			"record_date":     inspec.RecordDate,
 			"inspection_type": inspec.InspectionType,
 		}).Error(err)
 		return nil, errors.Wrap(err, "error creating inspection")

@@ -38,7 +38,6 @@ CREATE TABLE inspections (
     score INTEGER NOT NULL,
     grade_id INTEGER NOT NULL REFERENCES grades,
     grade_date date NOT NULL,
-    record_date date NOT NULL,
     inspection_type VARCHAR(256) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );

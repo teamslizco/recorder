@@ -13,7 +13,6 @@ type Inspection struct {
 	Score          string    `json:"score,omitempty"`
 	GradeID        uint32    `json:"grade,omitmepty"`
 	GradeDate      time.Time `json:"grade_date,omitempty"`
-	RecordDate     time.Time `json:"record_date,omitempty"`
 	InspectionDate time.Time `json:"inspection_date,omitempty"`
 	CreatedAt      time.Time `json:"created_at,omitempty"`
 }
