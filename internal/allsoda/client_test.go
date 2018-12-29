@@ -9,7 +9,7 @@ import (
 )
 
 func TestRetrieveInspections_shouldRetrieveAndUnmarshalResponse(t *testing.T) {
-	client := New(toStrPtr("https://data.cityofnewyork.us/resource/xx67-kt59"), logrus.New())
+	client := New(toStrPtr("https://data.cityofnewyork.us/resource/9w7m-hzhe.json"), logrus.New())
 
 	expected := &Inspection{
 		CuisineDescription:   toStrPtr("Bakery"),

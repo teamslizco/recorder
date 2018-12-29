@@ -14,6 +14,29 @@ type DB interface {
 	CreateViolation(*CreateViolationInput) (*Violation, error)
 }
 
+type Config struct {
+	Host     string
+	Port     string
+	User     string
+	Password string
+	Name     string
+	Logger   logrus.FieldLogger
+}
+
+func New(c *Config) (DB, error) {
+	s := fmt.Sprintf(
+		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		c.Host, c.Port, c.User, c.Password, c.Name, c.Logger,
+	)
+
+	database, err := gorm.Open("postgres", s)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to start the db client")
+	}
+
+	return &db{db: database, logger: c.Logger}, nil
+}
+
 type db struct {
 	db     *gorm.DB
 	logger logrus.FieldLogger

@@ -1,7 +1,7 @@
 
 version: '2.1'
 services:
-  database:
+  db:
     image: postgres:9.6
     ports:
       - 5432:5432
@@ -17,14 +17,20 @@ services:
     image: 725423950623.dkr.ecr.us-east-1.amazonaws.com/flyway:a250d9950198bc2110f6f57af99c8a6d715a68e1
     volumes:
       - ./flyway:/flyway
-    command: ["-url=jdbc:postgresql://database:5432/recorder","migrate"]
+    command: ["-url=jdbc:postgresql://db:5432/recorder","migrate"]
     depends_on:
-      database:
+      db:
         condition: service_healthy
-  dp:
+  recorder:
     image: recorder
     ports:
       - 8080
+    environment:
+      RECORDER_DB_HOST: db
+      RECORDER_DB_PORT: 5432
+      RECORDER_DB_NAME: recorder
+      RECORDER_DB_USER: recorder
+      RECORDER_DB_PASSWORD: redrocer
     depends_on:
-      database:
+      db:
         condition: service_healthy

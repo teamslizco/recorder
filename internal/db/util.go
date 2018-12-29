@@ -7,6 +7,10 @@ import (
 	"github.com/pkg/errors"
 )
 
+func toStrPtr(str string) *string {
+	return &str
+}
+
 func strToDate(str *string) (time.Time, error) {
 	var t time.Time
 	if str == nil {

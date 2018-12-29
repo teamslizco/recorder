@@ -1,5 +1,7 @@
 SHELL=/bin/bash
 
+RECORDER_DB_HOST ?= localhost
+
 GOVERSION:=$(shell go version)
 
 ARCHS:=linux/amd64
@@ -24,8 +26,14 @@ deps: ${GO_NOVENDOR}
 fmt:
 	diff -u <(echo -n) <(gofmt -s -d ${GO_NOVENDOR})
 
-test: deps
-	go test ./...
+envs:
+	RECORDER_DB_HOST=$(RECORDER_DB_HOST) \
+	RECORDER_DB_PORT=5432 \
+	RECORDER_DB_NAME=recorder \
+	RECORDER_DB_USER=recorder \
+	RECORDER_DB_PASSWORD=redrocer
 
+test: envs deps
+	go test ./... -v ${PROJECT_NOVENDOR}
 vet:
 	go vet -x ${PROJECT_NOVENDOR}
