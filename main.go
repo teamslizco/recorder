@@ -6,11 +6,11 @@ import (
 	"github.com/kelseyhightower/envconfig"
 	"github.com/sirupsen/logrus"
 
-	"github.com/teamslizco/recorder/internal/opendata"
+	"github.com/teamslizco/recorder/internal/allsoda"
 )
 
 type Specification struct {
-	OpenDataEndpoint *string `required:"true" split_words:"true"`
+	SodaEndpoint string `required:"true" split_words:"true"`
 }
 
 func main() {
@@ -24,8 +24,8 @@ func main() {
 		logger.Fatal(err.Error())
 	}
 
-	fmt.Printf("Initializing client with %s\n", s.OpenDataEndpoint)
-	client := opendata.New(s.OpenDataEndpoint, logger)
+	fmt.Printf("Initializing client with %s\n", s.SodaEndpoint)
+	client := allsoda.New(s.SodaEndpoint, logger)
 
 	inspecs, err := client.RetrieveInspections()
 	if err != nil {

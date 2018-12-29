@@ -9,11 +9,11 @@ import (
 )
 
 type Client struct {
-	Endpoint *string
+	Endpoint string
 	Logger   logrus.FieldLogger
 }
 
-func New(endpoint *string, logger logrus.FieldLogger) *Client {
+func New(endpoint string, logger logrus.FieldLogger) *Client {
 	return &Client{
 		Endpoint: endpoint,
 		Logger:   logger,
@@ -45,12 +45,12 @@ type Inspection struct {
 }
 
 func (client *Client) RetrieveInspections() (*Output, error) {
-	if client.Endpoint == nil {
+	if client.Endpoint == "" {
 		return nil, errors.New("No endpoint passed to retrieve inspections")
 	}
 
 	inspecs := []*Inspection{}
-	gr := soda.NewGetRequest(*client.Endpoint, "")
+	gr := soda.NewGetRequest(client.Endpoint, "")
 	gr.Format = "json"
 	gr.Query.AddOrder("camis", false)
 	ogr, err := soda.NewOffsetGetRequest(gr)
