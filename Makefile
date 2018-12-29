@@ -24,8 +24,10 @@ deps: ${GO_NOVENDOR}
 fmt:
 	diff -u <(echo -n) <(gofmt -s -d ${GO_NOVENDOR})
 
+qtest:
+	go test -v ${PROJECT_NOVENDOR}
 test: deps
-	go test ./...
+	go test ${PROJECT_NOVENDOR}
 
 vet:
-	go vet -x ${PROJECT_NOVENDOR}
+	go vet ${PROJECT_NOVENDOR}
