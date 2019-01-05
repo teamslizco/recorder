@@ -1,5 +1,5 @@
 FROM golang:1.7.1-alpine
-MAINTAINER "Team Slizo" <teamslizco@gmail.com>
+MAINTAINER "Team Slizco" <teamslizco@gmail.com>
 
 ARG git_url
 ARG git_branch_name

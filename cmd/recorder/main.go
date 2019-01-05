@@ -1,12 +1,10 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/kelseyhightower/envconfig"
 	"github.com/sirupsen/logrus"
 
-	"github.com/teamslizco/recorder/internal/allsoda"
+	"github.com/teamslizco/recorder/internal/soda"
 )
 
 type Specification struct {
@@ -14,9 +12,9 @@ type Specification struct {
 }
 
 func main() {
-	fmt.Println("Hello, recorder ;)")
 
 	logger := logrus.New()
+	logger.Info("Hello, recorder ;)")
 
 	var s Specification
 	err := envconfig.Process("Recorder", &s)
@@ -24,13 +22,12 @@ func main() {
 		logger.Fatal(err.Error())
 	}
 
-	fmt.Printf("Initializing client with %s\n", s.SodaEndpoint)
-	client := allsoda.New(s.SodaEndpoint, logger)
-
-	inspecs, err := client.RetrieveInspections()
+	logger.Infof("Initializing client with %s\n", s.SodaEndpoint)
+	svc, err := soda.New(s.SodaEndpoint, logger)
 	if err != nil {
-		logger.Error(err.Error())
+		logger.Fatal(err.Error())
 	}
+	srv := server(svc)
 
-	fmt.Printf("%d inspections retrieved\n", len(inspecs.Inspections))
+	logger.Fatal(srv.ListenAndServe())
 }
