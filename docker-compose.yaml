@@ -1,0 +1,9 @@
+version: '3'
+services:
+  recorder:
+    build:
+      context: .
+    environment:
+      - RECORDER_SODA_ENDPOINT=https://data.cityofnewyork.us/resource/9w7m-hzhe
+    ports:
+    - "8080"

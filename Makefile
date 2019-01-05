@@ -16,7 +16,7 @@ GIT_HASH=$(shell git rev-parse HEAD)
 default: build fmt vet
 
 build:
-	CGO_ENABLED=0	gox -osarch "${ARCHS}" -ldflags "-X github.com/teamslizco/recorder/main.version=${VERSION} -X github.com/teamslizco/recorder/main.gitHash=${GIT_HASH}"  -output pkg/{{.OS}}_{{.Arch}}/recorder
+	CGO_ENABLED=0	gox -osarch "${ARCHS}" -output pkg/{{.OS}}_{{.Arch}}/recorder ./cmd/recorder
 
 deps: ${GO_NOVENDOR}
 	glide -q install
